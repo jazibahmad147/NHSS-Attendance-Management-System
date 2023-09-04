@@ -70,7 +70,7 @@
               @csrf
               <h1>Create Account</h1>
               <div>
-                <input type="text" class="form-control" name="fName" placeholder="Full Name" required />
+                <input type="text" class="form-control" name="fname" placeholder="Full Name" required />
               </div>
               <div>
                 <input type="email" class="form-control" name="email" placeholder="Email" required />

@@ -1,0 +1,8 @@
+@ECHO OFF
+TITLE NHSS ATTENDANCE MANAGEMENT SOFTWARE RUNNING...
+ECHO Please wait...
+CD E:\NHSS Attendance Management\htdocs\nhss_attendance_management
+E:
+php artisan serve
+START http://127.0.0.1:8000/
+PAUSE

@@ -11,7 +11,7 @@ class UsersController extends Controller
     function register(Request $req){
         $response['success'] = array('success' => false, 'messages' => array());
         $user = new User;
-        $user->fname = $req->fname;
+        $user->name = $req->fname;
         $user->email = $req->email;
         $user->password = $req->password;
         // check user already registered or not

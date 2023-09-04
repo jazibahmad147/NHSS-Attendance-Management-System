@@ -60,7 +60,7 @@
             </div>
             <nav class="nav navbar-nav">
               <ul class=" navbar-right">
-                <a class="dropdown open pull-right" href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                <a class="dropdown open pull-right" href="/logout"><i class="fa fa-sign-out"></i> Log Out</a>
               </ul>
             </nav>
           </div>
