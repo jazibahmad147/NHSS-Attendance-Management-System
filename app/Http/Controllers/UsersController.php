@@ -13,7 +13,7 @@ class UsersController extends Controller
         $user = new User;
         $user->name = $req->fname;
         $user->email = $req->email;
-        $user->password = $req->password;
+        $user->password = md5($req->password);
         // check user already registered or not
         $count = DB::table('users')
         ->where('email',$user->email)
