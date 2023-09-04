@@ -21,6 +21,7 @@ class StudentsController extends Controller
         ->where('rollNumber',$student->rollNumber)
         ->where('class',$student->class)
         ->where('section',$student->section)
+        ->where('status',1)
         ->count();
         if($count==1){
             $response['success'] = false;
