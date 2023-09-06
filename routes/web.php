@@ -48,7 +48,6 @@ Route::get('student/delete/{id}',[StudentsController::class,'delete'])->Middlewa
 // Attendance 
 Route::get('attendance',[AttendancesController::class,'viewClasses'])->Middleware('sessionGaurd');
 Route::get('take-attendance/{class}/{section}',[AttendancesController::class,'viewNewAttendanceTable'])->name('take-attendance')->Middleware('sessionGaurd');
-// Route::get('update-attendance/{class}/{section}',[AttendancesController::class,'viewUpdateAttendancePage'])->name('update-attendance')->Middleware('sessionGaurd');
 Route::get('update-attendance/{class}/{section}', function ($class, $section) {
     return view('update-attendance', compact('class', 'section'));
 })->name('update-attendance')->middleware('sessionGaurd');

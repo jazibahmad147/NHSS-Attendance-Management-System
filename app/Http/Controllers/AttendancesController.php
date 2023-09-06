@@ -23,7 +23,7 @@ class AttendancesController extends Controller
         ->where('class',$class)
         ->where('section',$section)
         ->get();
-        return view('take-attendance',['records'=>$record]);
+        return view('take-attendance',['records'=>$record,'class'=>$class,'section'=>$section]);
     }
 
     function fetchOldAttendance(Request $req){
