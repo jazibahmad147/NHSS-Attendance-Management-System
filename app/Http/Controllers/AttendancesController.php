@@ -39,45 +39,97 @@ class AttendancesController extends Controller
         return $record;
     }
 
-    function viewAttendanceRegister(Request $req,$class,$section){
+    // function viewAttendanceRegister(Request $req,$class,$section){
+    //     if ($req->isMethod('get')) {
+    //         $record = DB::table('students')
+    //         ->leftJoin('attendances', 'students.id', '=', 'attendances.studentId')
+    //         ->where('class',$class)
+    //         ->where('section',$section)
+    //         ->orderBy('date','asc')
+    //         ->get();
+    //     } 
+    //     elseif ($req->isMethod('post')) {
+    //         $monthAndYear = $req->date;
+    //         list($year, $month) = explode('-', $monthAndYear);
+    //         $startDate = date('Y-m-01', strtotime($monthAndYear));
+    //         $endDate = date('Y-m-t', strtotime($monthAndYear));
+
+    //         $record = DB::table('students')
+    //         ->leftJoin('attendances', 'students.id', '=', 'attendances.studentId')
+    //         ->where('class',$class)
+    //         ->where('section',$section)
+    //         ->where('date', '>=', $startDate)
+    //         ->where('date', '<=', $endDate)
+    //         ->orderBy('date','asc')
+    //         ->get();
+    //     }
+
+    //     $dates = array();
+    //     $rollNumbers = array();
+    //     $date = '';
+    //     for ($i=0; $i < count($record); $i++) { 
+    //         if($record[$i]->date != $date){
+    //             // echo $record[$i]->date."<br>";
+    //             array_push($dates,$record[$i]->date);
+    //         }
+    //         $date = $record[$i]->date;
+    //         array_push($rollNumbers,$record[$i]->rollNumber);
+    //     }
+    //     $uniqueRollNumbers = array_unique($rollNumbers);
+    //     return $record;
+    //     // return view('attendance-register',['class'=>$class,'section'=>$section,'records'=>$record,'dates'=>$dates,'rollNumbers'=>$uniqueRollNumbers]);
+    // }
+
+    function viewAttendanceRegister(Request $req, $class, $section){
         if ($req->isMethod('get')) {
             $record = DB::table('students')
-            ->leftJoin('attendances', 'students.id', '=', 'attendances.studentId')
-            ->where('class',$class)
-            ->where('section',$section)
-            ->orderBy('date','asc')
-            ->get();
-        } 
-        elseif ($req->isMethod('post')) {
+                ->leftJoin('attendances', 'students.id', '=', 'attendances.studentId')
+                ->where('class', $class)
+                ->where('section', $section)
+                ->orderBy('date', 'asc')
+                ->get();
+        } elseif ($req->isMethod('post')) {
             $monthAndYear = $req->date;
             list($year, $month) = explode('-', $monthAndYear);
             $startDate = date('Y-m-01', strtotime($monthAndYear));
             $endDate = date('Y-m-t', strtotime($monthAndYear));
 
             $record = DB::table('students')
-            ->leftJoin('attendances', 'students.id', '=', 'attendances.studentId')
-            ->where('class',$class)
-            ->where('section',$section)
-            ->where('date', '>=', $startDate)
-            ->where('date', '<=', $endDate)
-            ->orderBy('date','asc')
-            ->get();
+                ->leftJoin('attendances', 'students.id', '=', 'attendances.studentId')
+                ->where('class', $class)
+                ->where('section', $section)
+                ->where('date', '>=', $startDate)
+                ->where('date', '<=', $endDate)
+                ->orderBy('date', 'asc')
+                ->get();
         }
-        
-        $dates = array();
-        $rollNumbers = array();
+
+        // Sorting the records by rollNumber
+        $record = collect($record)->sortBy('rollNumber')->values()->all();
+
+        $dates = [];
+        $rollNumbers = [];
         $date = '';
-        for ($i=0; $i < count($record); $i++) { 
-            if($record[$i]->date != $date){
-                // echo $record[$i]->date."<br>";
-                array_push($dates,$record[$i]->date);
+
+        foreach ($record as $entry) {
+            if ($entry->date != $date) {
+                array_push($dates, $entry->date);
             }
-            $date = $record[$i]->date;
-            array_push($rollNumbers,$record[$i]->rollNumber);
+            $date = $entry->date;
+            array_push($rollNumbers, $entry->rollNumber);
         }
-        $uniqueRollNumbers = array_unique($rollNumbers);
-        return view('attendance-register',['class'=>$class,'section'=>$section,'records'=>$record,'dates'=>$dates,'rollNumbers'=>$uniqueRollNumbers]);
+
+        // $uniqueRollNumbers = array_unique($rollNumbers);
+        // return $rollNumbers;
+        return view('attendance-register', [
+            'class' => $class,
+            'section' => $section,
+            'records' => $record,
+            'dates' => $dates,
+            'rollNumbers' => $rollNumbers,
+        ]);
     }
+
 
     function save(Request $req){
         // $attendance = new Attendance;

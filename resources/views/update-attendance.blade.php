@@ -8,7 +8,7 @@
             <form id="saveAttendanceForm" action="/updateAttendance" method="POST">
                 @csrf
                 <div class="x_title">
-                <h2>Update Attendance | {{$class}}<sup>TH</sup> {{$section}}</h2>
+                <h2>Update Attendance | {{$class}} {{$section}}</h2>
                 <div class="row nav navbar-right panel_toolbox">
                     <div class="col"><input type="date" id="date" name="date" value="{{date('Y-m-d')}}" class="d-inline form-control form-control-sm" required></div>
                     <div class="col"><input type="button" onclick="fetchAttendance()" class="d-inline btn btn-sm btn-info" value="Fetch"></div>
@@ -25,14 +25,13 @@
                                 <table id="" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
                                             <th>Roll Number</th>
                                             <th>Name</th>
                                             <th>Father</th>
                                             <th colspan="3" class="text-center">Attendance</th>
                                         </tr>
                                         <tr>
-                                            <th colspan="4"></th>
+                                            <th colspan="3"></th>
                                             <th>P</th>
                                             <th>A</th>
                                             <th>L</th>

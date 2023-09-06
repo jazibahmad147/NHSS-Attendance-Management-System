@@ -17,7 +17,7 @@
             <form id="" action="{{ route('view-attendance-register', ['class' => $class, 'section' => $section]) }}" method="POST">
                 @csrf
                 <div class="x_title">
-                <h2>Update Attendance</h2>
+                <h2>Attendance Register | {{$class}} {{$section}}</h2>
                 <div class="row nav navbar-right panel_toolbox d-print-none">
                     <div class="col"><input type="month" id="date" name="date" value="{{date('Y-m')}}" class="d-inline form-control form-control-sm" required></div>
                     <div class="col"><input type="submit" id="updateBtn" class="d-inline btn btn-sm btn-success" value="Fetch"></div>
