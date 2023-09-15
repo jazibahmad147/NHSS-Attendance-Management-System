@@ -94,7 +94,6 @@
                         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
                                     <th>Roll</th>
                                     <th>Name</th>
                                     <th>Father</th>
@@ -106,7 +105,6 @@
                             <tbody>
                                 @for ($i = 0; $i < count($students); $i++)
                                     <tr>
-                                        <td>{{$i+1}}</td>
                                         <td>{{ $students[$i]->rollNumber }}</td>
                                         <td>{{ $students[$i]->name }}</td>
                                         <td>{{ $students[$i]->father }}</td>
